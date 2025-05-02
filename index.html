@@ -128,9 +128,12 @@
 
     <script>
       const form = document.getElementById("userForm");
+      const submitBtn = form.querySelector('input[type="submit"]');
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.value = "Submitting...";
 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
@@ -165,6 +168,9 @@
             title: "Error",
             text: "Could not reach the server.",
           });
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.value = "Submit";
         }
       });
     </script>
